@@ -4,7 +4,8 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/state-in-constructor": 0,
     "import/no-unresolved": 0,
-    "no-console": 0
+    "no-console": 0,
+    "dot-notation": 0
   },
   "env": {
     "browser": true,

@@ -1,24 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
-
-
-
-  *,*::after,*::before{
-   
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  /* font-family: 'Roboto', sans-serif; */
-
+  *,*::after,*::before
+  {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
   }
-
-  /* html{
-  font-family: 'Montserrat', sans-serif;
-    } */
-  
+  body{
+    overflow-x:hidden;
+  }
+    
 `;
 
 export default GlobalStyle;

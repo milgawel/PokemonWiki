@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   width: 27%;
   margin: 3% 0 3% 3%;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+    margin: 10px auto;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -13,6 +18,11 @@ const TextContainer = styled.div`
   padding: 0px;
   font-family: sans-serif;
   font-size: 16px;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+  }
 `;
 
 const PokemonData = ({
@@ -26,8 +36,8 @@ const PokemonData = ({
   presenceShiny,
   addedBy,
 }) => {
-  const translateTypeOfHabitat = (type) => {
-    switch (type) {
+  const translateTypeOfHabitat = (typo) => {
+    switch (typo) {
       case 'grassland':
         return 'Łąka';
       case 'mountain':
@@ -51,18 +61,18 @@ const PokemonData = ({
     }
   };
 
-  const difficultyType = (type) => {
-    if (type > 150) {
+  const difficultyType = (typo) => {
+    if (typo > 150) {
       return 'Łatwa';
     }
-    if (type < 40) {
+    if (typo < 40) {
       return 'Trudna';
     }
     return 'Średnia';
   };
 
-  const translateTypeOfPokemon = (type) => {
-    switch (type) {
+  const translateTypeOfPokemon = (typo) => {
+    switch (typo) {
       case 'grass':
         return 'trawiasty';
       case 'fire':
@@ -120,7 +130,7 @@ const PokemonData = ({
         </p>
         <p style={{ textTransform: 'capitalize' }}>
           <b>Region:</b>
-          {region ? region : 'brak informacji'}
+          {region.length ? region : 'brak informacji'}
         </p>
         <p>
           <b>Występowanie w dziczy:</b>{' '}
@@ -136,16 +146,32 @@ const PokemonData = ({
         </p>
         <p>
           <b>Występowanie shiny:</b>{' '}
-          {translateTypeOfHabitat(presenceWild)
-            ? translateTypeOfHabitat(presenceWild)
+          {translateTypeOfHabitat(presenceShiny)
+            ? translateTypeOfHabitat(presenceShiny)
             : 'brak informacji'}
         </p>
         <p>
-          <b>Dodawany do kolekcji przez:</b> {capturePossibility > 1 ? 'Złapanie' : 'Kupienie'}
+          <b>Dodawany do kolekcji przez:</b> {addedBy > 1 ? 'Złapanie' : 'Kupienie'}
         </p>
       </TextContainer>
     </Wrapper>
   );
+};
+
+PokemonData.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  gender: PropTypes.number,
+  region: PropTypes.string.isRequired,
+  presenceWild: PropTypes.string.isRequired,
+  capturePossibility: PropTypes.number.isRequired,
+  difficultyCatching: PropTypes.number.isRequired,
+  presenceShiny: PropTypes.string.isRequired,
+  addedBy: PropTypes.number.isRequired,
+};
+
+PokemonData.defaultProps = {
+  gender: '',
 };
 
 export default PokemonData;

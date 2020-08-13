@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import logo from 'assets/logo.png';
 import Pokemon from 'components/atoms/Pokemon';
 import Pagination from 'components/molecules/Pagination';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   width: 49%;
   position: relative;
+  padding-right: 15px;
 `;
 
 const Image = styled.img`
@@ -79,6 +81,10 @@ const PokeList = ({ pokemons }) => {
       <Pagination />
     </Wrapper>
   );
+};
+
+PokeList.propTypes = {
+  pokemons: PropTypes.element.isRequired,
 };
 
 export default PokeList;

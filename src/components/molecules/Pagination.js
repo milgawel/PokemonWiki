@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withRouter, NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Button = styled.p`
+const Button = styled(NavLink)`
   background-color: #f9e01d;
   color: #306ab5;
   height: 40px;
@@ -40,34 +41,30 @@ const Button = styled.p`
 `;
 
 const Pagination = (props) => {
-  const page = Number(props.location.pathname.substr(1));
+  const {
+    location: { pathname },
+  } = props;
+  const page = Number(pathname.substr(1));
 
   // console.log(typeof page);
   return (
     <Wrapper>
       <Container>
-        <Button as={NavLink} to={`/${page <= 1 ? 1 : page - 1}`}>
-          {`${page <= 2 ? 1 : page - 2}`}
-        </Button>
-
-        <Button as={NavLink} to={`/${page < 3 ? 2 : page - 1}`}>
-          {`${page < 3 ? 2 : page - 1}`}
-        </Button>
-        <Button as={NavLink} to={`/${page < 4 ? 3 : page}`}>
-          {`${page < 4 ? 3 : page}`}
-        </Button>
-        <Button as={NavLink} to={`/${page < 4 ? 4 : page + 1}`}>
-          {`${page < 4 ? 4 : page + 1}`}
-        </Button>
-        <Button as={NavLink} to={`/${page < 4 ? 5 : page + 2}`}>
-          {`${page < 4 ? 5 : page + 2}`}
-        </Button>
-        <Button as={NavLink} to={`/${page < 4 ? 6 : page + 3}`}>
-          {`${page < 4 ? 6 : page + 3}`}
-        </Button>
+        <Button to={`/${page <= 2 ? 1 : page - 2}`}>{`${page <= 2 ? 1 : page - 2}`}</Button>
+        <Button to={`/${page < 3 ? 2 : page - 1}`}>{`${page < 3 ? 2 : page - 1}`}</Button>
+        <Button to={`/${page < 4 ? 3 : page}`}>{`${page < 4 ? 3 : page}`}</Button>
+        <Button to={`/${page < 4 ? 4 : page + 1}`}>{`${page < 4 ? 4 : page + 1}`}</Button>
+        <Button to={`/${page < 4 ? 5 : page + 2}`}>{`${page < 4 ? 5 : page + 2}`}</Button>
+        <Button to={`/${page < 4 ? 6 : page + 3}`}>{`${page < 4 ? 6 : page + 3}`}</Button>
       </Container>
     </Wrapper>
   );
+};
+
+Pagination.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(Pagination);

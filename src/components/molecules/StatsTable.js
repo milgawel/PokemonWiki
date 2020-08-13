@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Table = styled.div`
   display: flex;
   flex-direction: column;
   width: 27%;
   margin: 3% 3% 3% 0;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+    margin: 10px auto;
+  }
 `;
 
 const TableHeader = styled.p`
@@ -26,7 +31,7 @@ const TableHeader = styled.p`
 const Row = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.3fr 0.7fr;
 `;
 
 const Cell = styled.p`
@@ -35,7 +40,7 @@ const Cell = styled.p`
   height: 50px;
   line-height: 50px;
   margin-top: 0px;
-  padding: 0px;
+
   padding-left: 20px;
   font-family: sans-serif;
   font-size: 16px;
@@ -47,10 +52,13 @@ const Cell = styled.p`
 
 const Value = styled(Cell)`
   text-align: center;
+  padding: 0px;
 `;
 
 const StatsTable = (props) => {
-  const { attack, defense, spatt, spdef, hp } = props.stats;
+  const {
+    stats: { attack, defense, spatt, spdef, hp },
+  } = props;
 
   return (
     <Table>
@@ -77,6 +85,26 @@ const StatsTable = (props) => {
       </Row>
     </Table>
   );
+};
+
+StatsTable.propTypes = {
+  stats: PropTypes.shape({
+    attack: PropTypes.string,
+    defense: PropTypes.string,
+    spatt: PropTypes.string,
+    spdef: PropTypes.string,
+    hp: PropTypes.string,
+  }),
+};
+
+StatsTable.defaultProps = {
+  stats: PropTypes.shape({
+    attack: '',
+    defense: '',
+    spatt: '',
+    spdef: '',
+    hp: '',
+  }),
 };
 
 export default StatsTable;

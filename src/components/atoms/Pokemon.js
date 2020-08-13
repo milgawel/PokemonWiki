@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Redirect, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Image = styled.img`
   height: 70%;
@@ -67,6 +68,14 @@ const Pokemon = ({ keyValue, id, name, type, minLvl, evolution }) => {
       <Cellz onClick={() => <Redirect to={`/pokemon/${keyValue}`} />}>więcej </Cellz>
     </Wrapper>
   );
+};
+Pokemon.propTypes = {
+  keyValue: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  minLvl: PropTypes.string.isRequired,
+  evolution: PropTypes.string.isRequired,
 };
 
 export default Pokemon;

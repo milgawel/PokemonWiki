@@ -11,11 +11,6 @@ const Root = () => (
         <Route exact path="/" component={() => <Redirect to="/1" />} />
         <Route path="/pokemon/:pokemon" component={PokemonView} />
         <Route path="/:page" component={MainView} />
-
-        {/* <Route
-          path="/:page"
-          render={(props) => <Main key={props.match.params.pageid} {...props} />}
-        /> */}
       </Switch>
     </MainTemplate>
   </BrowserRouter>

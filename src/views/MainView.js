@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import image from 'assets/image.png';
 import PokeList from 'components/molecules/PokeList';
 import MainTemplate from 'templates/MainTemplate';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  overflow: hidden;
 `;
 
 const Image = styled.img`
@@ -20,7 +22,7 @@ const Image = styled.img`
   padding: 5px;
 `;
 
-class App extends Component {
+class MainView extends Component {
   state = {
     pokemons: [],
     offset: 0,
@@ -31,7 +33,10 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+    const {
+      location: { pathname },
+    } = this.props;
+    if (prevProps.location.pathname !== pathname) {
       this.InitiateFunction();
     }
   }
@@ -158,7 +163,7 @@ class App extends Component {
                 evolution,
               });
 
-              pokemons.sort(function (a, b) {
+              pokemons.sort((a, b) => {
                 return a.id - b.id;
               });
               this.setState({
@@ -173,8 +178,11 @@ class App extends Component {
   };
 
   InitiateFunction() {
-    console.log(this.props);
-    const offset = `${this.props.location.pathname.substr(1)}0` - 10;
+    const {
+      location: { pathname },
+    } = this.props;
+
+    const offset = `${pathname.substr(1)}0` - 10;
 
     this.setState(
       {
@@ -199,4 +207,10 @@ class App extends Component {
   }
 }
 
-export default App;
+MainView.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default MainView;
