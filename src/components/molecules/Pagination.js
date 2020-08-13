@@ -11,7 +11,6 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   display: flex;
-  /* border: 2px solid red; */
   justify-content: center;
 `;
 
@@ -26,7 +25,6 @@ const Button = styled.p`
   line-height: 40px;
   font-size: 20px;
   font-weight: 900;
-  /* font-style: italic; */
   margin: 0 4px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;

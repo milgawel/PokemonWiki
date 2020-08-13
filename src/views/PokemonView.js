@@ -21,11 +21,11 @@ const LogoImage = styled.img`
 const Container = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-between;
 `;
 
 const PokeImage = styled.img`
-  width: 33%;
-  border: 2px solid red;
+  width: 40%;
 `;
 
 const LowerContainer = styled.div`
@@ -63,15 +63,26 @@ const PokeName = styled.p`
 class Pokemon extends Component {
   state = {
     id: '',
+    name: '',
+    type: '',
+    gender: '',
+    region: '',
+    presenceWild: '',
+    capturePossibility: '',
+    difficultyCatching: '',
+    presenceShiny: '',
+    addedBy: '',
+
+    stats: { attack: '1', defence: '1', spattack: '1', spdefence: '1', hp: '1' },
   };
 
   componentDidMount() {
-    this.InitiateFunction();
+    this.FetchStats();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.InitiateFunction();
+      this.FetchStats();
     }
   }
 
@@ -81,25 +92,87 @@ class Pokemon extends Component {
     return number;
   };
 
-  InitiateFunction() {
-    console.log(this.props);
+  FetchStats() {
     const id = this.props.match.params.pokemon;
-    this.setState({
-      id,
-    });
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const name = data.species.name;
+        const stats = {};
+        data.stats.forEach((el) => {
+          if (el.stat.name === 'speed') return;
+          if (el.stat.name === 'special-defense') {
+            stats['spdef'] = `${el.base_stat}`;
+          } else if (el.stat.name === 'special-attack') {
+            stats['spatt'] = `${el.base_stat}`;
+          } else stats[el.stat.name] = `${el.base_stat}`;
+        });
+
+        const type = [];
+        data.types.forEach((el) => type.push(`${el.type.name}`));
+        this.setState({ stats, name, id, type });
+
+        return fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        let gender = data.gender_rate;
+        let region = data.pokedex_numbers[1].pokedex.name;
+        let presenceWild = data.habitat.name;
+        let capturePossibility = data.capture_rate;
+        let difficultyCatching = data.capture_rate;
+        let presenceShiny = data.habitat.name;
+        let addedBy = data.capture_rate;
+        this.setState({
+          gender,
+          region,
+          presenceWild,
+          capturePossibility,
+          difficultyCatching,
+          presenceShiny,
+          addedBy,
+        });
+      })
+
+      .catch((err) => console.log(err));
   }
 
   render() {
+    const {
+      stats,
+      id,
+      name,
+      type,
+      gender,
+      region,
+      presenceWild,
+      capturePossibility,
+      difficultyCatching,
+      presenceShiny,
+      addedBy,
+    } = this.state;
+
     return (
       <Wrapper>
         <LogoImage src={Logo} alt="pokemon logo" />
         <Container>
-          <StatsTable />
+          <StatsTable stats={stats} />
           <PokeImage
-            src={`https://pokeres.bastionbot.org/images/pokemon/${this.state.id}.png`}
+            src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
             alt={`pokemon `}
           />
-          <PokemonData />
+          <PokemonData
+            name={name}
+            type={type}
+            gender={gender}
+            region={region}
+            presenceWild={presenceWild}
+            capturePossibility={capturePossibility}
+            difficultyCatching={difficultyCatching}
+            presenceShiny={presenceShiny}
+            addedBy={addedBy}
+          />
         </Container>
         <LowerContainer>
           <PageButton
@@ -112,13 +185,13 @@ class Pokemon extends Component {
           >
             {'< powrót'}
           </PageButton>
-          <PokeName>{`${this.addZerosToNumber(this.state.id)} BULBASAUR`}</PokeName>
+          <PokeName>{`${this.addZerosToNumber(id)} ${name}`}</PokeName>
           <PageButton
             type="button"
             onClick={() => {
               console.log('clicked');
               console.log(this.props);
-              this.props.history.push(`/pokemon/${+this.state.id + 1}`);
+              this.props.history.push(`/pokemon/${+id + 1}`);
             }}
           >
             {'następny >'}

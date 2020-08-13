@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Table = styled.div`
   display: flex;
   flex-direction: column;
-
   width: 27%;
   margin: 3% 3% 3% 0;
 `;
@@ -20,6 +19,8 @@ const TableHeader = styled.p`
   font-weight: 900;
   font-style: italic;
   background-color: #f9e01d;
+  text-align: left;
+  padding-left: 20px;
 `;
 
 const Row = styled.div`
@@ -29,10 +30,8 @@ const Row = styled.div`
 `;
 
 const Cell = styled.p`
-  /* padding-left: 102px; */
   color: #306ab5;
   text-transform: uppercase;
-  /* text-align: center; */
   height: 50px;
   line-height: 50px;
   margin-top: 0px;
@@ -50,29 +49,31 @@ const Value = styled(Cell)`
   text-align: center;
 `;
 
-const StatsTable = () => {
+const StatsTable = (props) => {
+  const { attack, defense, spatt, spdef, hp } = props.stats;
+
   return (
     <Table>
-      <TableHeader> Przyrosty</TableHeader>
+      <TableHeader>Statystyki</TableHeader>
       <Row>
         <Cell>Atak</Cell>
-        <Value>+3</Value>
+        <Value>{attack}</Value>
       </Row>
       <Row>
         <Cell>Obrona</Cell>
-        <Value>+3</Value>
+        <Value>{defense}</Value>
       </Row>
       <Row>
         <Cell>SP.atak</Cell>
-        <Value>+4</Value>
+        <Value>{spatt}</Value>
       </Row>
       <Row>
         <Cell>SP.obrona</Cell>
-        <Value>+4</Value>
+        <Value>{spdef}</Value>
       </Row>
       <Row>
         <Cell>Życie</Cell>
-        <Value>+15</Value>
+        <Value>{hp}</Value>
       </Row>
     </Table>
   );

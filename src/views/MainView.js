@@ -40,13 +40,10 @@ class App extends Component {
     switch (type) {
       case 'grass':
         return 'trawiasty';
-
       case 'fire':
         return 'ognisty';
-
       case 'water':
         return 'wodny';
-
       case 'bug':
         return 'robaczy';
       case 'ice':
@@ -120,10 +117,6 @@ class App extends Component {
             .then((response) => response.json())
             .then((newData) => {
               if (newData.chain.species.name === name) {
-                console.log(`[first]`);
-                console.log(name);
-                console.log(`[test]`);
-
                 if (newData.chain.evolves_to[0]) {
                   evolution = newData.chain.evolves_to[0].species.name;
                   minLvl = '1';
@@ -135,7 +128,6 @@ class App extends Component {
                 }
                 if (minLvl === null) minLvl = '1';
               } else if (newData.chain.evolves_to[0].species.name === name) {
-                console.log(`[second]`);
                 if (newData.chain.evolves_to[0].evolves_to[0]) {
                   evolution = newData.chain.evolves_to[0].evolves_to[0].species.name;
                   minLvl = newData.chain.evolves_to[0].evolution_details[0].min_level;
@@ -144,8 +136,6 @@ class App extends Component {
                 }
                 if (minLvl === null) minLvl = '1';
               } else {
-                console.log(`[third]`);
-
                 evolution = '';
                 if (newData.chain.evolves_to[1]) {
                   minLvl = newData.chain.evolves_to[1].evolution_details[0].min_level;
