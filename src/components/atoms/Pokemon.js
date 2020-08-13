@@ -1,13 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Redirect, Link } from 'react-router-dom';
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 0.5fr 1fr 1fr;
-  background-color: #f4f4f4;
-  margin-bottom: 2px;
-  height: 80px;
-`;
 const Image = styled.img`
   height: 70%;
   margin: 0 auto;
@@ -25,20 +19,52 @@ const Cell = styled.p`
   font-family: sans-serif;
   font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
+`;
+
+const Cellx = styled(Cell)``;
+const Celly = styled(Cell)``;
+const Cellz = styled(Cell)`
+  display: none;
+  color: #f9e01d;
+`;
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 0.5fr 1fr 1fr;
+  background-color: #f4f4f4;
+  margin-bottom: 2px;
+  height: 80px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #306ab5;
+  }
+
+  &:hover ${Cellx} {
+    color: #f9e01d;
+  }
+  &:hover ${Celly} {
+    display: none;
+  }
+  &:hover ${Cellz} {
+    display: block;
+  }
 `;
 
 const Pokemon = ({ keyValue, id, name, type, minLvl, evolution }) => {
   return (
-    <Wrapper>
+    <Wrapper as={Link} to={`/pokemon/${keyValue}`}>
       <Cell>{id}</Cell>
       <Image
         src={`https://pokeres.bastionbot.org/images/pokemon/${keyValue}.png`}
         alt={`pokemon ${name}`}
       />
-      <Cell>{name}</Cell>
+      <Cellx>{name}</Cellx>
       <Cell>{minLvl}</Cell>
       <Cell>{type}</Cell>
-      <Cell>{evolution}</Cell>
+      <Celly>{evolution}</Celly>
+      <Cellz onClick={() => <Redirect to={`/pokemon/${keyValue}`} />}>więcej </Cellz>
     </Wrapper>
   );
 };

@@ -27,19 +27,13 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
-    const offset = `${this.props.location.pathname.substr(1)}0` - 10;
+    this.InitiateFunction();
+  }
 
-    this.setState(
-      {
-        offset,
-      },
-      () => {
-        this.fetchPokemons();
-      },
-    );
-
-    // console.log(this.props);
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.InitiateFunction();
+    }
   }
 
   translateType = (type) => {
@@ -187,6 +181,20 @@ class App extends Component {
       })
       .catch((err) => console.log(err));
   };
+
+  InitiateFunction() {
+    console.log(this.props);
+    const offset = `${this.props.location.pathname.substr(1)}0` - 10;
+
+    this.setState(
+      {
+        offset,
+      },
+      () => {
+        this.fetchPokemons();
+      },
+    );
+  }
 
   render() {
     const { pokemons } = this.state;

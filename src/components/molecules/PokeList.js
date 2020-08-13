@@ -7,7 +7,6 @@ import Pagination from 'components/molecules/Pagination';
 const Wrapper = styled.div`
   width: 49%;
   position: relative;
-  /* border: 2px solid red; */
 `;
 
 const Image = styled.img`
@@ -76,6 +75,7 @@ const PokeList = ({ pokemons }) => {
         </ListHeader>
         {MappedPokeList}
       </List>
+
       <Pagination />
     </Wrapper>
   );

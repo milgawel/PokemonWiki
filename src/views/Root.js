@@ -1,16 +1,21 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-
 import MainTemplate from 'templates/MainTemplate';
-import Main from 'views/Main';
+import MainView from 'views/MainView';
+import PokemonView from 'views/PokemonView';
 
 const Root = () => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <MainTemplate>
       <Switch>
         <Route exact path="/" component={() => <Redirect to="/1" />} />
-        {/* <Route path="/1" component={Main} /> */}
-        <Route path="/:page" component={Main} />
+        <Route path="/pokemon/:pokemon" component={PokemonView} />
+        <Route path="/:page" component={MainView} />
+
+        {/* <Route
+          path="/:page"
+          render={(props) => <Main key={props.match.params.pageid} {...props} />}
+        /> */}
       </Switch>
     </MainTemplate>
   </BrowserRouter>
