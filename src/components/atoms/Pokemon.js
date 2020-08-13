@@ -37,6 +37,7 @@ const Wrapper = styled.div`
   margin-bottom: 2px;
   height: 80px;
   text-decoration: none;
+  min-width: 550px;
 
   &:hover {
     background-color: #306ab5;

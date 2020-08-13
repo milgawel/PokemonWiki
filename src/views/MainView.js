@@ -10,6 +10,9 @@ const Wrapper = styled.div`
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 1260px) {
+    flex-direction: column;
+  }
 `;
 
 const Image = styled.img`
@@ -20,6 +23,9 @@ const Image = styled.img`
   object-fit: contain;
   top: 10px;
   padding: 5px;
+  @media screen and (max-width: 1260px) {
+    display: none;
+  }
 `;
 
 class MainView extends Component {

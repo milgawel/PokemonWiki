@@ -9,6 +9,15 @@ const Wrapper = styled.div`
   width: 49%;
   position: relative;
   padding-right: 15px;
+  @media screen and (max-width: 1260px) {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  @media screen and (max-width: 767px) {
+    width: 98%;
+    margin: 0 auto;
+  }
 `;
 
 const Image = styled.img`
@@ -21,10 +30,14 @@ const Image = styled.img`
 const List = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 767px) {
+    overflow-x: scroll;
+  }
 `;
 
 const ListHeader = styled.ul`
   width: 100%;
+  min-width: 550px;
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 0.5fr 1fr 1fr;
   padding: 0;

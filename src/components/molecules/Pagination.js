@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const Container = styled.div`
