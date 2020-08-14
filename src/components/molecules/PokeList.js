@@ -58,7 +58,6 @@ const Cell = styled.p`
 `;
 
 const PokeList = ({ pokemons }) => {
-  // list of pokemons mapped from array
   const MappedPokeList = pokemons.map((pokemon) => {
     const { key, id, name, type, minLvl, evolution } = pokemon;
 
@@ -78,7 +77,6 @@ const PokeList = ({ pokemons }) => {
   return (
     <Wrapper>
       <Image src={logo} alt="logo" />
-      {/* {console.log(pokemons)} */}
       <List>
         <ListHeader>
           <Cell>id</Cell>
@@ -97,7 +95,9 @@ const PokeList = ({ pokemons }) => {
 };
 
 PokeList.propTypes = {
-  pokemons: PropTypes.element.isRequired,
+  pokemons: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.object]),
+  ).isRequired,
 };
 
 export default PokeList;

@@ -72,7 +72,7 @@ const Pokemon = ({ keyValue, id, name, type, minLvl, evolution }) => {
 };
 Pokemon.propTypes = {
   keyValue: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   minLvl: PropTypes.string.isRequired,

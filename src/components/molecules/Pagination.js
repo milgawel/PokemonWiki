@@ -54,9 +54,16 @@ const Pagination = (props) => {
         <Button to={`/${page <= 2 ? 1 : page - 2}`}>{`${page <= 2 ? 1 : page - 2}`}</Button>
         <Button to={`/${page < 3 ? 2 : page - 1}`}>{`${page < 3 ? 2 : page - 1}`}</Button>
         <Button to={`/${page < 4 ? 3 : page}`}>{`${page < 4 ? 3 : page}`}</Button>
-        <Button to={`/${page < 4 ? 4 : page + 1}`}>{`${page < 4 ? 4 : page + 1}`}</Button>
-        <Button to={`/${page < 4 ? 5 : page + 2}`}>{`${page < 4 ? 5 : page + 2}`}</Button>
-        <Button to={`/${page < 4 ? 6 : page + 3}`}>{`${page < 4 ? 6 : page + 3}`}</Button>
+
+        {page < 81 ? (
+          <Button to={`/${page < 4 ? 4 : page + 1}`}>{`${page < 4 ? 4 : page + 1}`}</Button>
+        ) : null}
+        {page < 80 ? (
+          <Button to={`/${page < 4 ? 5 : page + 2}`}>{`${page < 4 ? 5 : page + 2}`}</Button>
+        ) : null}
+        {page < 79 ? (
+          <Button to={`/${page < 4 ? 6 : page + 3}`}>{`${page < 4 ? 6 : page + 3}`}</Button>
+        ) : null}
       </Container>
     </Wrapper>
   );

@@ -68,6 +68,7 @@ const PageButton = styled.button`
   background-color: #f9e01d;
   border: 0px;
   outline: none;
+  cursor: pointer;
 `;
 
 const PokeName = styled.p`
@@ -90,6 +91,11 @@ const PokeNameMobile = styled(PokeName)`
   margin-top: 25px;
   @media screen and (max-width: 767px) {
     display: block;
+    margin-bottom: 25px;
+  }
+  @media screen and (max-width: 401px) {
+    line-height: 35px;
+    font-size: 35px;
   }
 `;
 
@@ -234,15 +240,19 @@ class Pokemon extends Component {
             {'< powrót'}
           </PageButton>
           <PokeName>{`${this.addZerosToNumber(id)} ${name}`}</PokeName>
-          <PageButton
-            type="button"
-            onClick={() => {
-              const { history } = this.props;
-              history.push(`/pokemon/${+id + 1}`);
-            }}
-          >
-            {'następny >'}
-          </PageButton>
+          {+id < 807 ? (
+            <PageButton
+              type="button"
+              onClick={() => {
+                const { history } = this.props;
+                history.push(`/pokemon/${+id + 1}`);
+              }}
+            >
+              {'następny >'}
+            </PageButton>
+          ) : (
+            <div style={{ width: '140px' }} />
+          )}
         </LowerContainer>
       </Wrapper>
     );

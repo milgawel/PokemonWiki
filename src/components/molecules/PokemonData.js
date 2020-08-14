@@ -74,41 +74,41 @@ const PokemonData = ({
   const translateTypeOfPokemon = (typo) => {
     switch (typo) {
       case 'grass':
-        return 'trawiasty';
+        return 'Trawiasty';
       case 'fire':
-        return 'ognisty';
+        return 'Ognisty';
       case 'water':
-        return 'wodny';
+        return 'Wodny';
       case 'bug':
-        return 'robaczy';
+        return 'Robaczy';
       case 'ice':
-        return 'lodowy';
+        return 'Lodowy';
       case 'normal':
-        return 'normalny';
+        return 'Normalny';
       case 'electric':
-        return 'elektryczny';
+        return 'Elektryczny';
       case 'poison':
-        return 'trujący';
+        return 'Trujący';
       case 'ghost':
-        return 'duch';
+        return 'Duch';
       case 'ground':
-        return 'ziemny';
+        return 'Ziemny';
       case 'rock':
-        return 'kamienny';
+        return 'Kamienny';
       case 'psychic':
-        return 'psychiczny';
+        return 'Psychiczny';
       case 'flying':
-        return 'latający';
+        return 'Latający';
       case 'fighting':
-        return 'walczący';
+        return 'Walczący';
       case 'fairy':
-        return 'bajkowy';
+        return 'Bajkowy';
       case 'dragon':
-        return 'smoczy';
+        return 'Smoczy';
       case 'steel':
-        return 'stalowy';
+        return 'Stalowy';
       case 'dark':
-        return 'mroczny';
+        return 'Mroczny';
       default:
         return type;
     }
@@ -118,7 +118,6 @@ const PokemonData = ({
     <Wrapper>
       <TextContainer>
         <p style={{ textTransform: 'capitalize' }}>
-          {' '}
           <b>Nazwa:</b> {name}
         </p>
         <p>
@@ -130,7 +129,7 @@ const PokemonData = ({
         </p>
         <p style={{ textTransform: 'capitalize' }}>
           <b>Region:</b>
-          {region.length ? region : 'brak informacji'}
+          {region.length ? ` ${region}` : 'brak informacji'}
         </p>
         <p>
           <b>Występowanie w dziczy:</b>{' '}
